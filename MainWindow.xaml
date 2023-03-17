@@ -1,0 +1,19 @@
+﻿<Window x:Class="SecurityReport.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecurityReport"
+        mc:Ignorable="d"
+        Title="Security Reporter" Height="450" Width="800" ScrollViewer.CanContentScroll="True">
+    <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+    <StackPanel x:Name="stackPanelReportMenu" Visibility="Visible" CanVerticallyScroll="True">
+        <GroupBox x:Name="groupBoxOptions" Header="Select what to include to report" Padding="5">
+            <StackPanel x:Name="stackPanelOptions">
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+    <StackPanel x:Name="dataStackPanel" Visibility="Hidden">
+    </StackPanel>
+</Grid>
+</Window>
