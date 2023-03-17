@@ -6,14 +6,18 @@
         xmlns:local="clr-namespace:SecurityReport"
         mc:Ignorable="d"
         Title="Security Reporter" Height="450" Width="800" ScrollViewer.CanContentScroll="True">
-    <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-    <StackPanel x:Name="stackPanelReportMenu" Visibility="Visible" CanVerticallyScroll="True">
-        <GroupBox x:Name="groupBoxOptions" Header="Select what to include to report" Padding="5">
-            <StackPanel x:Name="stackPanelOptions">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="baseStackPanel">
+                <StackPanel x:Name="stackPanelReportMenu" Visibility="Visible" CanVerticallyScroll="True">
+                    <GroupBox x:Name="groupBoxOptions" Header="Select what to include to report" Padding="5">
+                        <StackPanel x:Name="stackPanelOptions">
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel x:Name="dataStackPanel" Visibility="Hidden">
+                </StackPanel>
             </StackPanel>
-        </GroupBox>
-    </StackPanel>
-    <StackPanel x:Name="dataStackPanel" Visibility="Hidden">
-    </StackPanel>
-</Grid>
+        </ScrollViewer>
+    </Grid>
 </Window>

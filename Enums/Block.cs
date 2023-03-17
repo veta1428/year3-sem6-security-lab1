@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SecurityReport.Enums;
 public enum Block
 {
+    OS = 1,
+
     [Display(Name = "Processor")]
-    Processor = 1,
+    Processor = 2,
 
     [Display(Name = "Random Access Memory")]
-    Ram = 2,
+    Ram = 3,
 
     [Display(Name = "Drives")]
-    Drives = 3,
+    Drives = 4,
 
     [Display(Name = "Windows Updates")]
-    Updates = 4,
+    Updates = 5,
 
-    AntiVirus = 5,
+    AntiVirus = 6,
 
-    FireWall = 6,
-
-    OS = 7,
+    FireWall = 7,
 }

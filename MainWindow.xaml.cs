@@ -48,9 +48,13 @@ public partial class MainWindow : Window
 
     public void OnGenerateReportButtonClicked(object sender, RoutedEventArgs e)
     {
-        stackPanelReportMenu.Visibility = Visibility.Hidden;
         var selectedOptions = GetSelectedBlocks();
-        GenerateData(selectedOptions);
+        bool isOk = GenerateData(selectedOptions);
+        if(!isOk)
+            return;
+        stackPanelReportMenu.Visibility = Visibility.Hidden;
+        baseStackPanel.Children.Clear();
+        baseStackPanel.Children.Add(dataStackPanel);
         dataStackPanel.Visibility = Visibility.Visible;
     }
 
@@ -73,8 +77,10 @@ public partial class MainWindow : Window
 
     public void OnBackToMenuClicked(object sender, RoutedEventArgs e)
     {
+        baseStackPanel.Children.Clear();
         dataStackPanel.Visibility = Visibility.Hidden;
         dataStackPanel.Children.Clear();
+        baseStackPanel.Children.Add(stackPanelReportMenu);
         stackPanelReportMenu.Visibility = Visibility.Visible;
     }
 
@@ -92,9 +98,18 @@ public partial class MainWindow : Window
     }
 
 
-    public void GenerateData(IEnumerable<Block> blocks)
+    public bool GenerateData(IEnumerable<Block> blocks)
     {
-        _manager.UpdateData(blocks);
+        try
+        {
+            _manager.UpdateData(blocks);
+        }
+        catch(Exception)
+        {
+            MessageBox.Show("Sorry, something went wrong :(");
+            return false;
+        }
+
         var data = _manager.Data;
         Button backToMenu = new Button() { Content = "Back to Menu" };
         backToMenu.Click += OnBackToMenuClicked;
@@ -107,17 +122,16 @@ public partial class MainWindow : Window
         foreach (var block in blocks)
         {
             var listData = data[block];
-            Label label = new Label() { Content = block.GetAttribute<DisplayAttribute>()?.Name ?? block.ToString() };
+            Label label = new Label() { Content = block.GetAttribute<DisplayAttribute>()?.Name ?? block.ToString(), FontSize = 30 };
             DataGrid dataGrid = new DataGrid();
             dataGrid.CanUserSortColumns = false;
-            //dataGrid.HorizontalAlignment = HorizontalAlignment.Stretch;
-            //dataGrid.VerticalAlignment = VerticalAlignment.Stretch;
-            //dataGrid.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-            dataGrid.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-            dataGrid.Height = 200;
+            dataGrid.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            dataGrid.MaxHeight = 200;
             dataGrid.ItemsSource = listData;
             dataStackPanel.Children.Add(label);
             dataStackPanel.Children.Add(dataGrid);
         }
+
+        return true;
     }
 }
